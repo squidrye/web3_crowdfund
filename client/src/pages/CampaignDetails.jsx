@@ -86,7 +86,7 @@ const giveMoneyForm = () => {
           className="mr-4 cursor-pointer py-1.5 font-bold">
           <span>Fund</span>
         </Typography>
-        <Card className='h-80 bg-[#e2e2e2] w-96'>
+        <Card className='h-80 bg-[#1c1c24] w-96'>
           <Typography className="mx-auto mt-3" variant="h4">
             Pledge without reward
           </Typography>

@@ -1,22 +1,23 @@
 import React, { useContext, createContext } from 'react';
 
-import { useAddress, useContract, useMetamask, useContractWrite } from '@thirdweb-dev/react';
+import { useAddress, useContract, useMetamask, useContractWrite, useContractRead } from '@thirdweb-dev/react';
 import { ethers } from 'ethers';
 import { EditionMetadataWithOwnerOutputSchema } from '@thirdweb-dev/sdk';
 
 const StateContext = createContext();
 
 export const StateContextProvider = ({ children }) => {
-  const { contract } = useContract('0x26002FcAE49674E464F067cA3e6a1055DD761d99');
+  const { contract } = useContract('0x181A370DAE4e4646751950a44e8e3816e7E07E7D');
   const { mutateAsync: createCampaign } = useContractWrite(contract, 'createCampaign');
-//   const {createCampaign} = useContractWrite(contract, 'createCampaign');
+  //   const {createCampaign} = useContractWrite(contract, 'createCampaign');
+  const { mutateAsync: getCampaigns } = useContractRead(contract, 'getCampaigns');
 
   const address = useAddress();
   const connect = useMetamask();
 
   const publishCampaign = async (form) => {
     try {
-      const data = await createCampaign([ 
+      const data = await createCampaign([
         address, // owner
         form.target,
         form.title, // title
@@ -31,7 +32,7 @@ export const StateContextProvider = ({ children }) => {
     }
   }
 
-  const getCampaigns = async () => {
+  const fetchCampaigns = async () => {
     const campaigns = await contract.call('getCampaigns');
 
     const parsedCampaings = campaigns.map((campaign, i) => ({
@@ -44,7 +45,7 @@ export const StateContextProvider = ({ children }) => {
       image: campaign.image,
       pId: i
     }));
-
+    console.log(campaigns);
     return parsedCampaings;
   }
 
@@ -57,7 +58,7 @@ export const StateContextProvider = ({ children }) => {
   }
 
   const donate = async (pId, amount) => {
-    const data = await contract.call('donateToCampaign', pId, { value: ethers.utils.parseEther(amount)});
+    const data = await contract.call('donateToCampaign', pId, { value: ethers.utils.parseEther(amount) });
 
     return data;
   }
@@ -68,7 +69,7 @@ export const StateContextProvider = ({ children }) => {
 
     const parsedDonations = [];
 
-    for(let i = 0; i < numberOfDonations; i++) {
+    for (let i = 0; i < numberOfDonations; i++) {
       parsedDonations.push({
         donator: donations[0][i],
         donation: ethers.utils.formatEther(donations[1][i].toString())
@@ -81,7 +82,7 @@ export const StateContextProvider = ({ children }) => {
 
   return (
     <StateContext.Provider
-      value={{ 
+      value={{
         address,
         contract,
         connect,
