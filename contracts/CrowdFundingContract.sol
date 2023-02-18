@@ -13,7 +13,7 @@ contract CrowdFundingContract {
         address[] donators;
         uint256[] donations;
     }
-    Campaign[] public campaigns;
+    mapping(uint256 => Campaign) public campaigns;
 
     uint256 public numberOfCampaigns = 0;
 
@@ -26,11 +26,6 @@ contract CrowdFundingContract {
         string memory _image
     ) public returns (uint256) {
         Campaign storage createdCampaign = campaigns[numberOfCampaigns++];
-
-        require(
-            _deadline == block.timestamp,
-            "deadline should be a date in the future"
-        );
 
         createdCampaign.ownerAddress = _ownerAddress;
         createdCampaign.targetAmount = _targetAmount;
