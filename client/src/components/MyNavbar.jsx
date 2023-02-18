@@ -24,24 +24,24 @@ const MyNavbar = () => {
       <Typography
         as="li"
         variant="small"
-        color="blue-gray"
-        className="p-1 font-normal text-lg"
+        color="white"
+        className="p-1 font-semibold text-lg"
       >
         <Link to="/" className="flex items-center">Home</Link>
       </Typography>
       <Typography
         as="li"
         variant="small"
-        color="blue-gray"
-        className="p-1 font-normal text-lg"
+        color="white"
+        className="p-1 font-semibold text-lg"
       >
         <Link to="/profile" className="flex items-center">Profile</Link>
       </Typography>
       <Typography
         as="li"
         variant="small"
-        color="blue-gray"
-        className="p-1 font-normal text-lg"
+        color="white"
+        className="p-1 font-semibold text-lg"
       >
         <Link to="/about-us" className="flex items-center">About us</Link>
       </Typography>
@@ -61,8 +61,9 @@ const MyNavbar = () => {
         <Typography
           as="a"
           href="#"
-          variant="small"
-          className="mr-4 cursor-pointer py-1.5 font-normal text-xl"
+          variant="h4"
+          color="white"
+          className="mr-4 cursor-pointer py-1.5 font-bold"
         >
           <span><Link to="/">CrowdFunding</Link></span>
         </Typography>
