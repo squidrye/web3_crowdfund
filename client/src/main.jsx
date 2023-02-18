@@ -7,13 +7,16 @@ import { ThemeProvider } from "@material-tailwind/react";
 // import { StateContextProvider } from './context';
 import App from "./App";
 import "./index.css";
+import { StateContextProvider } from "./context";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
   <ThirdwebProvider desiredChainId={ChainId.Goerli}>
+    <StateContextProvider>
       <ThemeProvider>
         <App />
       </ThemeProvider>
+    </StateContextProvider>
   </ThirdwebProvider>
 );

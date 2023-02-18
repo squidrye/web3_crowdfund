@@ -7,10 +7,13 @@ import {
   IconButton,
 } from "@material-tailwind/react";
 import { Link, useNavigate } from "react-router-dom";
+import { useStateContext } from "../context";
+
 const MyNavbar = () => {
   const [openNav, setOpenNav] = useState(false);
-  const [address, setAddress] = useState("0xw");
   const navigate = useNavigate();
+
+  const { connect, address } = useStateContext();
 
   useEffect(() => {
     window.addEventListener(
@@ -49,10 +52,11 @@ const MyNavbar = () => {
   );
 
   const handleBtnClick = () => {
-    if (address != "") {
+    if (address) {
       navigate("/create-campaign")
     } else {
       //connect to meta mask
+      connect()
     }
   }
   return (
