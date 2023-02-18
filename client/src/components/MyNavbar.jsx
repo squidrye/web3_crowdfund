@@ -8,9 +8,9 @@ import {
 } from "@material-tailwind/react";
 import { Link, useNavigate } from "react-router-dom";
 const MyNavbar = () => {
-    const [openNav, setOpenNav] = useState(false);
-    const [address, setAddress] = useState("");
-    const navigate = useNavigate();
+  const [openNav, setOpenNav] = useState(false);
+  const [address, setAddress] = useState("0xw");
+  const navigate = useNavigate();
 
   useEffect(() => {
     window.addEventListener(
@@ -18,7 +18,7 @@ const MyNavbar = () => {
       () => window.innerWidth >= 960 && setOpenNav(false)
     );
   }, []);
- 
+
   const navList = (
     <ul className="mb-4 mt-2 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
       <Typography
@@ -47,16 +47,16 @@ const MyNavbar = () => {
       </Typography>
     </ul>
   );
- 
+
   const handleBtnClick = () => {
-    if(address != "") {
+    if (address != "") {
       navigate("/create-campaign")
     } else {
       //connect to meta mask
     }
   }
   return (
-    <Navbar className="max-w-xxl mx-auto py-2 px-4 lg:px-8 lg:py-4 bg-indigo-400">
+    <Navbar className="max-w-xxl mx-auto py-2 px-4 lg:px-8 lg:py-4" variant="filled" color="white" shadow="true">
       <div className="container mx-auto flex items-center justify-between text-blue-gray-900">
         <Typography
           as="a"
@@ -111,7 +111,7 @@ const MyNavbar = () => {
       <MobileNav open={openNav}>
         <div className="container mx-auto">
           {navList}
-          <Button variant="gradient" size="sm" fullWidth className="mb-2">
+          <Button variant="gradient" size="sm" fullWidth className="mb-2" color="cyan">
             <span>{address ? "Create Campaign" : "Connect"}</span>
           </Button>
         </div>
