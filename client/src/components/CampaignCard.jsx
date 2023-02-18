@@ -9,8 +9,8 @@ import {
 
 const CampaignCard = () => {
   return (
-    <Card className="w-72 mt-8">
-      <CardHeader className="h-48">
+    <Card className="w-72 mt-8" shadow="true">
+      <CardHeader className="mt-4 h-48">
         <img
           src="/src/assets/courage.jpg"
           alt="campaign--img"
