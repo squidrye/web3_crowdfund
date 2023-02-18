@@ -8,25 +8,26 @@ import { useStateContext } from "../context/index.jsx";
 
 const Home = () => {
   const [campaigns, setCampaigns] = useState([]);
-  const { getCampaigns } = useStateContext();
+  const { address, contract, getCampaigns } = useStateContext();
   //map over the campaigns and create a card for each campaign
+
+  async function fetchData() {
+    var opt = await getCampaigns();
+    setCampaigns(opt);
+  }
   useEffect(() => {
-
-    async function fetchData() {
-      var opt = await getCampaigns();
-      setCampaigns(opt);
-    }
-
-    fetchData();
-  }, []);
+    if (contract)
+      fetchData();
+  }, [address, contract]);
   return (
     <Base>
+      {/* {JSON.stringify(campaigns)} */}
       <div className="grid grid-cols-4 gap-3 mt-5 container mx-auto">
         {
-          campaigns.map((campaign, index) => {
-            <Link to={`/campaign-details/${campaign.pid}`} element={< CampaignDetails />} >
+          campaigns && campaigns.map((campaign, index) => {
+            return (<Link to={`/campaign-details/${campaign.pId}`} state={{ campaign: campaign }} element={< CampaignDetails />} >
               <CampaignCard campaign={campaign} key={index} />
-            </Link>
+            </Link>)
           })
         }
       </div>
