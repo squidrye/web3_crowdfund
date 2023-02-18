@@ -9,7 +9,7 @@ import {
 
 const CampaignCard = () => {
   return (
-    <Card className="w-72 mt-8 campaign--card shadow-lg">
+    <Card className="w-72 mt-8 campaign--card drop-shadow-3xl bg-[#c9d6ff]">
       <CardHeader className="mt-4 h-48">
         <img
           src="/src/assets/courage.jpg"

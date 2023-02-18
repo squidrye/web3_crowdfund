@@ -16,7 +16,7 @@ const CreateCampaign = () => {
             Create campaign
           </Typography>
         </CardHeader>
-        <CardBody className='flex flex-col gap-4 !w-auto' color='white'>
+        <CardBody className='flex flex-col gap-4 !w-auto' color='white-700'>
           <Input label="Title" size="lg" />
           <Textarea label="Description" size="lg" />
           <Input label="Image" size="lg" />
