@@ -1,6 +1,6 @@
 import React from 'react'
 import Base from '../components/Base'
-import { Card, Typography } from '@material-tailwind/react'
+import { Card, CardBody, CardHeader, Typography, Input, CardFooter, Button } from '@material-tailwind/react'
 const CampaignDetails = () => {
   return (
     <Base>
@@ -33,6 +33,33 @@ const CampaignDetails = () => {
           >
             <span>Creator</span>
           </Typography>
+        </div>
+
+        {/* fund the campaign */}
+        <div>
+          <Typography as="a"
+            href="#"
+            variant="h4"
+            color="white"
+            className="mr-4 cursor-pointer py-1.5 font-bold">
+            <span>Fund</span>
+          </Typography>
+          <Card className='h-80 bg-[#e2e2e2] w-96'>
+              <Typography className="mx-auto mt-3" variant="h4">
+                Pledge without reward
+              </Typography>
+            <CardBody>
+            <Input label="ETH 0.1" size='md'/>
+
+            <div className="container bg-[#13131a] rounded-md h-32 text-white" >
+              <Typography variant="h6" className="mt-3 p-2">
+                Back it because you believe in it
+              </Typography>
+              <p className='mt-2 p-2'>Support the project for no reward, just because it speaks to you</p>
+            </div>
+              <Button fullWidth={true} className="mt-2" color='indigo' ripple={true}>Fund Campaign</Button>
+            </CardBody>
+          </Card>
         </div>
       </div>
     </Base>
