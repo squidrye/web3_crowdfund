@@ -25,7 +25,7 @@ const MyNavbar = () => {
         as="li"
         variant="small"
         color="blue-gray"
-        className="p-1 font-normal text-lg"
+        className="p-1 font-normal text-lg text-white"
       >
         <Link to="/" className="flex items-center">Home</Link>
       </Typography>
@@ -33,7 +33,7 @@ const MyNavbar = () => {
         as="li"
         variant="small"
         color="blue-gray"
-        className="p-1 font-normal text-lg"
+        className="p-1 font-normal text-lg text-white"
       >
         <Link to="/profile" className="flex items-center">Profile</Link>
       </Typography>
@@ -41,7 +41,7 @@ const MyNavbar = () => {
         as="li"
         variant="small"
         color="blue-gray"
-        className="p-1 font-normal text-lg"
+        className="p-1 font-normal text-lg text-white"
       >
         <Link to="/about-us" className="flex items-center">About us</Link>
       </Typography>
@@ -56,13 +56,14 @@ const MyNavbar = () => {
     }
   }
   return (
-    <Navbar className="max-w-xxl mx-auto py-2 px-4 lg:px-8 lg:py-4" variant="filled" color="white" shadow="true">
-      <div className="container mx-auto flex items-center justify-between text-blue-gray-900">
+    <Navbar className="max-w-xxl mx-auto py-2 px-4 lg:px-8 lg:py-4 drop-shadow-3xl text-white gradient-primary" variant="gradient" shadow="true">
+
+      < div className="container mx-auto flex items-center justify-between text-blue-gray-900 " >
         <Typography
           as="a"
           href="#"
           variant="small"
-          className="mr-4 cursor-pointer py-1.5 font-normal text-xl"
+          className="mr-4 cursor-pointer py-1.5 font-normal text-xl text-white"
         >
           <span><Link to="/">CrowdFunding</Link></span>
         </Typography>
@@ -107,7 +108,7 @@ const MyNavbar = () => {
             </svg>
           )}
         </IconButton>
-      </div>
+      </div >
       <MobileNav open={openNav}>
         <div className="container mx-auto">
           {navList}
@@ -116,7 +117,7 @@ const MyNavbar = () => {
           </Button>
         </div>
       </MobileNav>
-    </Navbar>
+    </Navbar >
   )
 }
 
