@@ -12,10 +12,8 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
   <ThirdwebProvider desiredChainId={ChainId.Goerli}>
-    <Router>
       <ThemeProvider>
         <App />
       </ThemeProvider>
-    </Router>
   </ThirdwebProvider>
 );

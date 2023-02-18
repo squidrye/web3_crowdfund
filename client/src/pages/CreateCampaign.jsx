@@ -1,8 +1,11 @@
 import React from 'react'
+import Base from '../components/Base'
 
 const CreateCampaign = () => {
   return (
-    <div>CreateCampaign</div>
+    <Base>
+      
+    </Base>
   )
 }
 

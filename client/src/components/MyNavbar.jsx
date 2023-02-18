@@ -6,7 +6,7 @@ import {
   Button,
   IconButton,
 } from "@material-tailwind/react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 const MyNavbar = () => {
     const [openNav, setOpenNav] = useState(false);
     const [address, setAddress] = useState("");
@@ -27,9 +27,7 @@ const MyNavbar = () => {
         color="blue-gray"
         className="p-1 font-normal text-lg"
       >
-        <a href="#" className="flex items-center">
-          Dashboard
-        </a>
+        <Link to="/" className="flex items-center">Home</Link>
       </Typography>
       <Typography
         as="li"
@@ -37,9 +35,7 @@ const MyNavbar = () => {
         color="blue-gray"
         className="p-1 font-normal text-lg"
       >
-        <a href="#" className="flex items-center">
-          Profile
-        </a>
+        <Link to="/profile" className="flex items-center">Profile</Link>
       </Typography>
       <Typography
         as="li"
@@ -47,9 +43,7 @@ const MyNavbar = () => {
         color="blue-gray"
         className="p-1 font-normal text-lg"
       >
-        <a href="#" className="flex items-center">
-          About us
-        </a>
+        <Link to="/about-us" className="flex items-center">About us</Link>
       </Typography>
     </ul>
   );
@@ -70,7 +64,7 @@ const MyNavbar = () => {
           variant="small"
           className="mr-4 cursor-pointer py-1.5 font-normal text-xl"
         >
-          <span>CrowdFunding</span>
+          <span><Link to="/">CrowdFunding</Link></span>
         </Typography>
         <div className="hidden lg:block">{navList}</div>
         <Button variant="gradient" size="sm" className="hidden lg:inline-block" onClick={handleBtnClick}>

@@ -1,11 +1,9 @@
 import React from 'react'
 import Base from '../components/Base'
-const Profile = () => {
+const About = () => {
   return (
-    <Base>
-      
-    </Base>
+    <Base></Base>
   )
 }
 
-export default Profile
+export default About

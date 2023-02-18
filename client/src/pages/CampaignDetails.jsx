@@ -1,8 +1,10 @@
 import React from 'react'
-
+import Base from '../components/Base'
 const CampaignDetails = () => {
   return (
-    <div>CampaignDetails</div>
+    <Base>
+      
+    </Base>
   )
 }
 
