@@ -10,14 +10,14 @@ const CampaignDetails = () => {
   const location = useLocation();
   const { campaign } = location.state;
 
-  const { address, getUserCampaigns, donate, getDonations } = useStateContext();
+  const { address, getUserCampaigns, donate, getDonations, getOwnerCampaigns } = useStateContext();
 
   const [fundAmount, setFundAmount] = useState(0)
   const [userCampaigns, setUserCampaigns] = useState([])
   const [donations, setDonations] = useState([])
   const [refresh, setRefresh] = useState(false);
   const fetchData = async () => {
-    var obj1 = await getUserCampaigns();
+    var obj1 = await getOwnerCampaigns(campaign.owner);
     var obj2 = await getDonations(campaign.pId);
 
     setUserCampaigns(obj1);
@@ -52,7 +52,7 @@ const CampaignDetails = () => {
             <img src={thirdweb} alt="user" className="w-[60%] h-[60%] object-contain" />
           </div>
           <div>
-            <h4 className="mr-4 cursor-pointer py-1.5 font-semibold text-white">{address}</h4>
+            <h4 className="mr-4 cursor-pointer py-1.5 font-semibold text-white">{campaign.owner}</h4>
             <p className="mt-[4px] font-epilogue font-normal text-[12px] text-[#808191]">{userCampaigns.length} Campaigns</p>
           </div>
         </div>
@@ -94,7 +94,7 @@ const CampaignDetails = () => {
 
             return (<div className='flex flex-row justify-between'>
               <p className='font-epilogue font-normal text-[16px] text-[#808191] leading-[26px] text-justify'>
-                1.{donator}
+                {index + 1}.{donator}
               </p>
               <p className='font-epilogue font-normal text-[16px] text-[#808191] leading-[26px] text-justify'>
                 {donation}
@@ -161,7 +161,7 @@ const CampaignDetails = () => {
           {/* //row-2 */}
           <Card className='h-auto w-full mx-12 grid grid-rows-3 '>
             <div className='row-span-2 text-center font-bold my-auto'>
-              3
+              {campaign.amountCollected}
             </div>
             <div className='bg-[#1c1c24] text-center text-white'>
               DAYS LEFT

@@ -54,6 +54,14 @@ export const StateContextProvider = ({ children }) => {
     return filteredCampaigns;
   }
 
+  const getOwnerCampaigns = async (ownerAddress) => {
+    const allCampaigns = await getCampaigns();
+
+    const filteredCampaigns = allCampaigns.filter((campaign) => campaign.owner === ownerAddress);
+
+    return filteredCampaigns;
+  }
+
   const donate = async (pId, amount) => {
     console.log(pId);
     console.log(amount);
@@ -89,7 +97,8 @@ export const StateContextProvider = ({ children }) => {
         getCampaigns,
         getUserCampaigns,
         donate,
-        getDonations
+        getDonations,
+        getOwnerCampaigns
       }}
     >
       {children}

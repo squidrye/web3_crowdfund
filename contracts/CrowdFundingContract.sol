@@ -27,6 +27,11 @@ contract CrowdFundingContract {
     ) public returns (uint256) {
         Campaign storage createdCampaign = campaigns[numberOfCampaigns++];
 
+        require(
+            _deadline < block.timestamp,
+            "deadline should be a date in the future"
+        );
+
         createdCampaign.ownerAddress = _ownerAddress;
         createdCampaign.targetAmount = _targetAmount;
         createdCampaign.image = _image;
@@ -45,10 +50,10 @@ contract CrowdFundingContract {
         campaign.donators.push(msg.sender);
         campaign.donations.push(sentAmount);
 
-        (bool success, ) = payable(campaign.ownerAddress).call{
-            value: sentAmount
-        }("");
-
+        // (bool success, ) = payable(campaign.ownerAddress).call{
+        //     value: sentAmount
+        // }("");
+        bool success = payable(campaign.ownerAddress).send(sentAmount);
         if (success) {
             campaign.amountRaised += sentAmount;
         }
