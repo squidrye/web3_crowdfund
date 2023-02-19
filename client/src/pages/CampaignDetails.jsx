@@ -57,7 +57,7 @@ const CampaignDetails = () => {
     if (fundAmount == "") return;
     let rate = await getUSDToETH(1);
     setRefresh(true);
-    await donate(campaign.pId, `${fundAmount * rate * math.pow(18)}`);
+    await donate(campaign.pId, `${fundAmount * rate}`);
     setRefresh(false);
   };
 
@@ -172,7 +172,7 @@ const CampaignDetails = () => {
               Pledge without reward
             </Typography>
             <CardBody>
-              <Input label="ETH 0.1" size="md" onChange={handleChange} />
+              <Input label="$1" size="md" onChange={handleChange} />
 
               <div className="container bg-[#2D383A] rounded-md h-32 text-white">
                 <Typography variant="h6" className="mt-3 p-2">

@@ -18,7 +18,7 @@ import { useNavigate } from "react-router-dom";
 
 
 const CreateCampaign = () => {
-
+  const [isCampaignDetailsLoading, setIsCampaignDetailsLoading] = useState();
   const [formDetails, setFormDetails] = useState({})
 
   const { createCampaign } = useStateContext()
@@ -33,36 +33,38 @@ const CreateCampaign = () => {
   }
 
   const handleSubmit = async (event) => {
-    createCampaign({ ...formDetails, target: ethers.utils.parseUnits(formDetails.target, 18) });
-    //create campaign
+    setIsCampaignDetailsLoading(true);
+    await createCampaign({ ...formDetails, target: ethers.utils.parseUnits(formDetails.target, 18) });
+    setIsCampaignDetailsLoading(false);
     navigate("/")
   }
 
   return (
-    <Base>
-      <Card className="w-auto mx-[30rem] mt-4 relative top-30 bg-[#e2e2e2]">
-        <CardHeader
-          variant="gradient"
-          color="indigo"
-          className="mb-4 grid h-28 place-items-center mt-10 shadow-0"
-        >
-          <Typography variant="h3">Create campaign</Typography>
-        </CardHeader>
-        <CardBody className="flex flex-col gap-4 !w-auto" color="white-700">
-          <Input label="Title" size="lg" name="title" onChange={handleChange} />
-          <Textarea label="Description" size="lg" name="description" onChange={handleChange} />
-          <Input label="Image" size="lg" name="image" onChange={handleChange} />
-          <div className="flex gap-2">
-            <Input label="DeadLine" size="md" type="date" name="deadline" onChange={handleChange} />
-            <Input label="Target Amount" size="md" name="target" onChange={handleChange} />
-          </div>
-        </CardBody>
-        <CardFooter>
-          <Button variant="gradient" fullWidth color="indigo" onClick={handleSubmit} ripple={true}>
-            Create Campaign
-          </Button>
-        </CardFooter>
-      </Card>
+    <Base>{
+      isCampaignDetailsLoading ? <img src="/src/assets/loader.svg" alt="loading" className="mx-auto" /> :
+        <Card className="w-auto mx-[30rem] mt-4 relative top-30 bg-[#e2e2e2]">
+          <CardHeader
+            variant="gradient"
+            color="indigo"
+            className="mb-4 grid h-28 place-items-center mt-10 shadow-0"
+          >
+            <Typography variant="h3">Create campaign</Typography>
+          </CardHeader>
+          <CardBody className="flex flex-col gap-4 !w-auto" color="white-700">
+            <Input label="Title" size="lg" name="title" onChange={handleChange} />
+            <Textarea label="Description" size="lg" name="description" onChange={handleChange} />
+            <Input label="Image" size="lg" name="image" onChange={handleChange} />
+            <div className="flex gap-2">
+              <Input label="DeadLine" size="md" type="date" name="deadline" onChange={handleChange} />
+              <Input label="Target Amount" size="md" name="target" onChange={handleChange} />
+            </div>
+          </CardBody>
+          <CardFooter>
+            <Button variant="gradient" fullWidth color="indigo" onClick={handleSubmit} ripple={true}>
+              Create Campaign
+            </Button>
+          </CardFooter>
+        </Card>}
     </Base>
   );
 };
