@@ -39,13 +39,13 @@ const CreateCampaign = () => {
 
   return (
     <Base>
-      <Card className="w-auto mx-[30rem] mt-4 relative top-30">
+      <Card className="w-auto mx-[30rem] mt-4 relative top-30 bg-[#e2e2e2]">
         <CardHeader
           variant="gradient"
-          color="cyan"
-          className="mb-4 grid h-28 place-items-center mt-10"
+          color="indigo"
+          className="mb-4 grid h-28 place-items-center mt-10 shadow-0"
         >
-          <Typography>Create campaign</Typography>
+          <Typography variant="h3">Create campaign</Typography>
         </CardHeader>
         <CardBody className="flex flex-col gap-4 !w-auto" color="white-700">
           <Input label="Title" size="lg" name="title" onChange={handleChange} />
@@ -57,7 +57,7 @@ const CreateCampaign = () => {
           </div>
         </CardBody>
         <CardFooter>
-          <Button variant="gradient" fullWidth color="cyan" onClick={handleSubmit}>
+          <Button variant="gradient" fullWidth color="indigo" onClick={handleSubmit} ripple={true}>
             Create Campaign
           </Button>
         </CardFooter>

@@ -23,14 +23,16 @@ const MyNavbar = () => {
   }, []);
 
   const navList = (
-    <ul className="mb-4 mt-2 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
+    <ul className="mb-4 mt-2 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6 nav--text">
       <Typography
         as="li"
         variant="small"
         color="white"
         className="p-1 font-semibold text-lg"
       >
-        <Link to="/" className="flex items-center">Home</Link>
+        <Link to="/" className="flex items-center">
+          Home
+        </Link>
       </Typography>
       <Typography
         as="li"
@@ -38,7 +40,9 @@ const MyNavbar = () => {
         color="white"
         className="p-1 font-semibold text-lg"
       >
-        <Link to="/profile" className="flex items-center">Profile</Link>
+        <Link to="/profile" className="flex items-center">
+          Profile
+        </Link>
       </Typography>
       <Typography
         as="li"
@@ -46,34 +50,46 @@ const MyNavbar = () => {
         color="white"
         className="p-1 font-semibold text-lg"
       >
-        <Link to="/about-us" className="flex items-center">About us</Link>
+        <Link to="/about-us" className="flex items-center">
+          About us
+        </Link>
       </Typography>
     </ul>
   );
 
   const handleBtnClick = () => {
     if (address) {
-      navigate("/create-campaign")
+      navigate("/create-campaign");
     } else {
       //connect to meta mask
-      connect()
+      connect();
     }
-  }
+  };
   return (
-    <Navbar className="max-w-xxl mx-auto py-2 px-4 lg:px-8 lg:py-4 drop-shadow-3xl text-white gradient-primary border-0" variant="gradient">
-
-      < div className="container mx-auto flex items-center justify-between text-blue-gray-900 " >
+    <Navbar
+      className="max-w-xxl mx-auto py-2 px-4 lg:px-8 lg:py-4 drop-shadow-md text-white gradient-primary border-0 opacity-80 myNav"
+      variant="gradient"
+    >
+      <div className="container mx-auto flex items-center justify-between text-blue-gray-900 ">
         <Typography
           as="a"
-          href="#"
           variant="h4"
           color="white"
           className="mr-4 cursor-pointer py-1.5 font-bold"
         >
-          <span><Link to="/">CrowdFunding</Link></span>
+          <span>
+            <Link to="/">CrowdFunding</Link>
+          </span>
         </Typography>
         <div className="hidden lg:block">{navList}</div>
-        <Button variant="gradient" size="sm" className="hidden lg:inline-block" onClick={handleBtnClick}>
+        <Button
+          variant="gradient"
+          size="sm"
+          className="hidden lg:inline-block btn-three rounded-0"
+          onClick={handleBtnClick}
+          color="indigo"
+          ripple={true}
+        >
           <span>{address ? "Create Campaign" : "Connect"}</span>
         </Button>
         <IconButton
@@ -113,17 +129,22 @@ const MyNavbar = () => {
             </svg>
           )}
         </IconButton>
-      </div >
+      </div>
       <MobileNav open={openNav}>
         <div className="container mx-auto">
           {navList}
-          <Button variant="gradient" size="sm" fullWidth className="mb-2" color="cyan">
+          <Button
+            variant="gradient"
+            size="sm"
+            className="mb-2 ease-in duration-300"
+            color="indigo"
+          >
             <span>{address ? "Create Campaign" : "Connect"}</span>
           </Button>
         </div>
       </MobileNav>
-    </Navbar >
-  )
-}
+    </Navbar>
+  );
+};
 
-export default MyNavbar
+export default MyNavbar;
