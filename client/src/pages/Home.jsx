@@ -10,27 +10,37 @@ const Home = () => {
   const [campaigns, setCampaigns] = useState([]);
   const { address, contract, getCampaigns } = useStateContext();
   //map over the campaigns and create a card for each campaign
-
+  const [isCampaignDetailsLoading, setIsCampaignDetailsLoading] = useState();
   async function fetchData() {
+    setIsCampaignDetailsLoading(true);
     var opt = await getCampaigns();
     setCampaigns(opt);
+    setIsCampaignDetailsLoading(false);
   }
   useEffect(() => {
-    if (contract)
-      fetchData();
+    if (contract) fetchData();
   }, [address, contract]);
   return (
     <Base>
-      {/* {JSON.stringify(campaigns)} */}
-      <div className="grid grid-cols-4 gap-3 mt-5 container mx-auto">
-        {
-          campaigns && campaigns.map((campaign, index) => {
-            return (<Link to={`/campaign-details/${campaign.pId}`} key={index} state={{ campaign: campaign }} element={< CampaignDetails />} >
-              <CampaignCard campaign={campaign} key={index} />
-            </Link>)
-          })
-        }
-      </div>
+      {isCampaignDetailsLoading ? (
+        <img src="/src/assets/loader.svg" alt="loading" className="mx-auto" />
+      ) : (
+        <div className="grid grid-cols-4 gap-3 mt-5 container mx-auto">
+          {campaigns &&
+            campaigns.map((campaign, index) => {
+              return (
+                <Link
+                  to={`/campaign-details/${campaign.pId}`}
+                  key={index}
+                  state={{ campaign: campaign }}
+                  element={<CampaignDetails />}
+                >
+                  <CampaignCard campaign={campaign} key={index} />
+                </Link>
+              );
+            })}
+        </div>
+      )}
     </Base>
   );
 };

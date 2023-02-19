@@ -15,7 +15,7 @@ module.exports = withMT({
         epilogue: ['Epilogue', 'sans-serif'],
       },
       dropShadow: {
-        '3xl': '0 12px 12px rgba(255, 255, 255, 0.25)',
+        '3xl': '0 12px 12px #0f2027',
       },
       boxShadow: {
         secondary: '10px 10px 20px rgba(2, 2, 2, 0.25)',
