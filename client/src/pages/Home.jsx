@@ -25,7 +25,7 @@ const Home = () => {
       {isCampaignDetailsLoading ? (
         <img src="/src/assets/loader.svg" alt="loading" className="mx-auto" />
       ) : (
-        <div className="grid grid-cols-4 gap-3 mt-5 container mx-auto">
+        <div className="flex flex-row flex-wrap gap-6 mt-5 container mx-auto">
           {campaigns &&
             campaigns.map((campaign, index) => {
               return (

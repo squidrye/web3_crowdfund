@@ -27,7 +27,7 @@ const Profile = () => {
       {isCampaignDetailsLoading ? (
         <img src="/src/assets/loader.svg" alt="loading" className="mx-auto" />
       ) : (
-        <div className="grid grid-cols-4 gap-3 mt-5 container mx-auto">
+        <div className="flex flex-row-4 flex-wrap gap-3 mt-5 container mx-auto">
           {userCampaigns &&
             userCampaigns.map((campaign, index) => {
               return (
