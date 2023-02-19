@@ -4,10 +4,10 @@ import { thirdweb } from '../assets'
 import { Card, CardBody, Progress, Typography, Input, CardFooter, Button } from '@material-tailwind/react'
 import { useLocation, useParams } from 'react-router-dom'
 import { useStateContext } from '../context'
+import axios from "axios";
 const CampaignDetails = () => {
 
   const location = useLocation();
-  // const { campaign } = location.state;
 
   const { donate, getDonations, getOwnerCampaigns, getCampaignById } = useStateContext();
   const { id } = useParams();
@@ -16,6 +16,18 @@ const CampaignDetails = () => {
   const [donations, setDonations] = useState([])
   const [campaign, setCampaign] = useState([])
   const [refresh, setRefresh] = useState(false);
+
+
+  const getUSDToETH = async (usd) => {
+    try {
+      let res = await axios.get(`https://api.coingecko.com/api/v3/simple/price?ids=usd&vs_currencies=eth`);
+      return res.data.usd.eth;
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+
   const fetchData = async () => {
     var obj3 = await getCampaignById(id)
     setCampaign(obj3);
@@ -34,7 +46,10 @@ const CampaignDetails = () => {
     setFundAmount(event.target.value)
   }
   const handleSubmit = async () => {
-    await donate(campaign.pId, fundAmount);
+
+    let rate = await getUSDToETH(1); //1 usd = etherium
+
+    await donate(campaign.pId, `${fundAmount * rate * math.pow(18)}`);
     setRefresh(!refresh);
   }
 

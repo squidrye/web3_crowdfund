@@ -16,6 +16,7 @@ import { useStateContext } from "../context";
 import { ethers } from "ethers";
 import { useNavigate } from "react-router-dom";
 
+
 const CreateCampaign = () => {
 
   const [formDetails, setFormDetails] = useState({})
@@ -31,7 +32,7 @@ const CreateCampaign = () => {
     }));
   }
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     createCampaign({ ...formDetails, target: ethers.utils.parseUnits(formDetails.target, 18) });
     //create campaign
     navigate("/")

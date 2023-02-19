@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.9;
+import "./PriceConverter.sol";
 
 contract CrowdFundingContract {
     struct Campaign {
@@ -28,7 +29,7 @@ contract CrowdFundingContract {
         Campaign storage createdCampaign = campaigns[numberOfCampaigns++];
 
         createdCampaign.ownerAddress = _ownerAddress;
-        createdCampaign.targetAmount = _targetAmount;
+        createdCampaign.targetAmount = (_targetAmount);
         createdCampaign.image = _image;
         createdCampaign.title = _title;
         createdCampaign.description = _description;
@@ -39,19 +40,17 @@ contract CrowdFundingContract {
     }
 
     function donateToCampaign(uint256 _id) public payable {
-        uint256 sentAmount = msg.value;
-
+        uint256 sentAmountUSD = PriceConverter.getConversionRate(msg.value) /
+            (1e18);
+        uint256 sentAmountWei = msg.value;
         Campaign storage campaign = campaigns[_id];
         campaign.donators.push(msg.sender);
-        campaign.donations.push(sentAmount);
+        campaign.donations.push(sentAmountUSD);
 
-        // (bool success, ) = payable(campaign.ownerAddress).call{
-        //     value: sentAmount
-        // }("");
-        bool success = payable(campaign.ownerAddress).send(sentAmount);
-        if (success) {
-            campaign.amountRaised += sentAmount;
-        }
+        (bool success, ) = payable(campaign.ownerAddress).call{
+            value: sentAmountWei
+        }("");
+        if (success) campaign.amountRaised += sentAmountUSD;
     }
 
     //returns address of dontators and dontations in contract with id
