@@ -20,20 +20,19 @@ const CreateCampaign = () => {
 
   const [formDetails, setFormDetails] = useState({})
 
-  const {createCampaign} = useStateContext()
+  const { createCampaign } = useStateContext()
 
   const navigate = useNavigate()
 
   const handleChange = (event) => {
-      setFormDetails(prevFormDetails => ({
-        ...prevFormDetails,
-        [event.target.name]: event.target.value
-      }));
+    setFormDetails(prevFormDetails => ({
+      ...prevFormDetails,
+      [event.target.name]: event.target.value
+    }));
   }
 
   const handleSubmit = (event) => {
-    console.log(formDetails);
-    createCampaign({...formDetails, target: ethers.utils.parseUnits(formDetails.target, 18)});
+    createCampaign({ ...formDetails, target: ethers.utils.parseUnits(formDetails.target, 18) });
     //create campaign
     navigate("/")
   }
@@ -49,12 +48,12 @@ const CreateCampaign = () => {
           <Typography>Create campaign</Typography>
         </CardHeader>
         <CardBody className="flex flex-col gap-4 !w-auto" color="white-700">
-          <Input label="Title" size="lg" name="title" onChange={handleChange}/>
-          <Textarea label="Description" size="lg" name="description" onChange={handleChange}/>
-          <Input label="Image" size="lg" name="image" onChange={handleChange}/>
+          <Input label="Title" size="lg" name="title" onChange={handleChange} />
+          <Textarea label="Description" size="lg" name="description" onChange={handleChange} />
+          <Input label="Image" size="lg" name="image" onChange={handleChange} />
           <div className="flex gap-2">
-            <Input label="DeadLine" size="md" type="date" name="deadline" onChange={handleChange}/>
-            <Input label="Target Amount" size="md" name="target" onChange={handleChange}/>
+            <Input label="DeadLine" size="md" type="date" name="deadline" onChange={handleChange} />
+            <Input label="Target Amount" size="md" name="target" onChange={handleChange} />
           </div>
         </CardBody>
         <CardFooter>

@@ -3,13 +3,10 @@ import {
   Card,
   CardHeader,
   CardBody,
-  CardFooter,
   Typography,
 } from "@material-tailwind/react";
 
 const CampaignCard = ({ campaign }) => {
-  console.log("CARD")
-  console.log(campaign)
   return (
     <Card className="w-72 mt-8 campaign--card drop-shadow-3xl bg-[#c9d6ff]">
       <CardHeader className="mt-4 h-48">

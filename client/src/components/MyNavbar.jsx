@@ -60,7 +60,7 @@ const MyNavbar = () => {
     }
   }
   return (
-    <Navbar className="max-w-xxl mx-auto py-2 px-4 lg:px-8 lg:py-4 drop-shadow-3xl text-white gradient-primary border-0" variant="gradient" shadow="true">
+    <Navbar className="max-w-xxl mx-auto py-2 px-4 lg:px-8 lg:py-4 drop-shadow-3xl text-white gradient-primary border-0" variant="gradient">
 
       < div className="container mx-auto flex items-center justify-between text-blue-gray-900 " >
         <Typography

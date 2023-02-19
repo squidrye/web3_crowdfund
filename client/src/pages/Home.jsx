@@ -25,7 +25,7 @@ const Home = () => {
       <div className="grid grid-cols-4 gap-3 mt-5 container mx-auto">
         {
           campaigns && campaigns.map((campaign, index) => {
-            return (<Link to={`/campaign-details/${campaign.pId}`} state={{ campaign: campaign }} element={< CampaignDetails />} >
+            return (<Link to={`/campaign-details/${campaign.pId}`} key={index} state={{ campaign: campaign }} element={< CampaignDetails />} >
               <CampaignCard campaign={campaign} key={index} />
             </Link>)
           })

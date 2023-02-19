@@ -1,25 +1,27 @@
 import React, { useEffect, useState } from 'react'
 import Base from '../components/Base'
 import { thirdweb } from '../assets'
-import { Card, CardBody, CardHeader, Typography, Input, CardFooter, Button } from '@material-tailwind/react'
-import { useLocation } from 'react-router-dom'
+import { Card, CardBody, Progress, Typography, Input, CardFooter, Button } from '@material-tailwind/react'
+import { useLocation, useParams } from 'react-router-dom'
 import { useStateContext } from '../context'
-
 const CampaignDetails = () => {
 
   const location = useLocation();
-  const { campaign } = location.state;
+  // const { campaign } = location.state;
 
-  const { address, getUserCampaigns, donate, getDonations, getOwnerCampaigns } = useStateContext();
-
+  const { donate, getDonations, getOwnerCampaigns, getCampaignById } = useStateContext();
+  const { id } = useParams();
   const [fundAmount, setFundAmount] = useState(0)
   const [userCampaigns, setUserCampaigns] = useState([])
   const [donations, setDonations] = useState([])
+  const [campaign, setCampaign] = useState([])
   const [refresh, setRefresh] = useState(false);
   const fetchData = async () => {
-    var obj1 = await getOwnerCampaigns(campaign.owner);
-    var obj2 = await getDonations(campaign.pId);
+    var obj3 = await getCampaignById(id)
+    setCampaign(obj3);
 
+    var obj1 = await getOwnerCampaigns(obj3.owner);
+    var obj2 = await getDonations(obj3.pId);
     setUserCampaigns(obj1);
     setDonations(obj2);
   }
@@ -34,6 +36,11 @@ const CampaignDetails = () => {
   const handleSubmit = async () => {
     await donate(campaign.pId, fundAmount);
     setRefresh(!refresh);
+  }
+
+  const buildProgressIndicator = () => {
+    let perc = (campaign.amountCollected / campaign.target) * 100;
+    return <Progress className="mt-4 text-black" value={perc} label="Completed" />
   }
 
   const buildCreatorRow = () => {
@@ -92,7 +99,7 @@ const CampaignDetails = () => {
           </Typography>
           {donations.map(({ donator, donation }, index) => {
 
-            return (<div className='flex flex-row justify-between'>
+            return (<div key={index} className='flex flex-row justify-between'>
               <p className='font-epilogue font-normal text-[16px] text-[#808191] leading-[26px] text-justify'>
                 {index + 1}.{donator}
               </p>
@@ -140,13 +147,16 @@ const CampaignDetails = () => {
   return (
     <Base>
       {/* //row1 */}
-      <div className="flex flex-cols container mx-auto mb-10 mt-10">
+      <div className="flex flex-row container mx-auto mb-10 mt-10">
         {/* //col1 */}
-        <img
-          src="/src/assets/courage.jpg"
-          alt="campaign--img"
-          className="w-[80%] h-[22rem] object-cover rounded-xl"
-        />
+        <div className='flex flex-col w-[80%] h-[23rem]'>
+          <img
+            src={campaign.image}
+            alt="campaign--img"
+            className=" object-cover w-full h-[21rem] rounded-xl"
+          />
+          {buildProgressIndicator()}
+        </div>
         {/* //col-2 */}
         <div className='grid grid-rows-3 gap-3'>
           {/* //row-1 */}
@@ -164,16 +174,16 @@ const CampaignDetails = () => {
               {campaign.amountCollected}
             </div>
             <div className='bg-[#1c1c24] text-center text-white'>
-              DAYS LEFT
+              Raised
             </div>
           </Card>
           {/* //row-3 */}
           <Card className='h-auto w-full mx-12 grid grid-rows-3 '>
             <div className='row-span-2 text-center font-bold my-auto'>
-              3
+              {campaign.target}
             </div>
             <div className='bg-[#1c1c24] text-center text-white'>
-              DAYS LEFT
+              Target Amount
             </div>
           </Card>
         </div>
@@ -181,6 +191,7 @@ const CampaignDetails = () => {
 
       <div className="grid grid-cols-3 mt-5 gap-7 container mx-auto">
         <div className='grid gird-rows-3 gap-3 col-span-2'>
+
           {buildCreatorRow()}
           {buildStoryRow()}
           {buildDonatorsRow()}
